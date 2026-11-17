@@ -1,21 +1,31 @@
-InBody 자재 위치 관리 웹사이트 - 로컬 전용 버전
+InBody 자재 위치 관리 웹사이트 - 실시간 공유 버전
 
-중요
-- Firebase 연결을 완전히 제거했습니다.
-- 서버, Firebase, 데이터베이스에 자재 정보를 저장하지 않습니다.
-- 자재 등록/수정/삭제와 위치 이동은 현재 브라우저 화면에서만 적용됩니다.
-- 페이지를 새로고침하거나 다시 열면 지도는 빈 5행 x 6열 상태로 초기화됩니다.
-- 다른 사람의 기기와 실시간 공유되지 않습니다.
+파일 구성
+- index.html : 웹사이트 화면 구조
+- styles.css : InBody Red 디자인 및 반응형 화면
+- app.js : 자재 관리 기능 및 Firebase Firestore 실시간 동기화
 
-주요 기능
-- InBody Red #971B2F 디자인
-- 12가지 색상 네모 선택 팔레트
-- 가로/세로 칸 추가 및 삭제
-- 자재 등록, 수정, 삭제
-- 자재명 및 품번 검색
-- 드래그 앤 드롭 이동: 빈 칸이면 이동, 자재가 있으면 위치 교환
+기존 Firebase 설정
+- Firebase 프로젝트: inbody-material-map
+- Firestore 문서: sharedMap/main
+- 저장 필드: mapState
 
-실행 방법
-1. 네 파일을 같은 폴더에 둡니다.
-2. index.html을 브라우저에서 엽니다. 또는 VS Code Live Server를 사용합니다.
-3. 인터넷 연결은 글꼴 로딩 외에는 필요하지 않습니다.
+실행 및 배포
+1. 네 파일(index.html, styles.css, app.js, README.txt)을 같은 폴더에 둡니다.
+2. GitHub 저장소 최상위(root)에 네 파일을 업로드하고 기존 파일을 덮어씁니다.
+3. GitHub 저장소 Settings > Pages에서 main / (root)로 배포합니다.
+4. GitHub Pages 주소로 접속합니다.
+
+실시간 공유
+- 자재 등록/수정/삭제, 드래그 이동 및 위치 교환, 행/열 추가·삭제가 Firestore에 저장됩니다.
+- 같은 주소에 접속한 다른 사용자 화면에도 변경 사항이 실시간 반영됩니다.
+- 여러 사용자의 변경은 Firestore 트랜잭션으로 서버의 최신 상태를 기준으로 처리합니다.
+
+Firebase 확인 사항
+- Firebase Console에서 프로젝트 inbody-material-map을 엽니다.
+- Firestore Database가 생성되어 있어야 합니다.
+- Firestore 보안 규칙이 읽기/쓰기를 허용해야 합니다. 인증 없는 전체 공개 규칙은 테스트용으로만 사용하고, 실제 운영 전에는 인증 및 접근 권한을 제한하세요.
+- Firebase Authentication의 승인된 도메인 제한을 사용하는 경우 GitHub Pages 도메인도 허용 목록에 추가해야 할 수 있습니다.
+
+주의
+GitHub Pages는 사이트 파일을 제공하고, 자재 데이터 저장 및 실시간 공유는 Firebase가 담당합니다. GitHub 저장소가 공개되어 있으면 소스 코드와 Firebase 웹 설정도 공개됩니다. 실제 회사의 민감한 자재 정보는 승인 없이 입력하지 마세요.
