@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InBody 자재 위치 관리</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">InBody</div>
+    <div class="brand-copy">
+      <strong>자재 위치 관리</strong>
+      <span>Material Location Management</span>
+    </div>
+    <div class="live"><i></i> 실시간 공유</div>
+  </header>
+
+  <main class="page">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">SMART MATERIAL MAP</p>
+        <h1>자재 위치 관리 시스템</h1>
+        <p class="sub">자재 위치를 한눈에 확인하고 간편하게 관리하세요.</p>
+      </div>
+      <div class="sync-state" id="syncState">연결 확인 중...</div>
+    </section>
+
+    <section class="toolbar panel">
+      <div class="toolbar-group">
+        <span class="group-title">지도 크기</span>
+        <button id="addCol" class="btn btn-primary">＋ 세로 칸 추가</button>
+        <button id="addRow" class="btn btn-primary">＋ 가로 칸 추가</button>
+        <button id="removeCol" class="btn btn-light">－ 세로 칸 삭제</button>
+        <button id="removeRow" class="btn btn-light">－ 가로 칸 삭제</button>
+      </div>
+      <div class="toolbar-group search-group">
+        <input id="searchInput" type="search" placeholder="자재명 또는 품번 검색">
+        <button id="searchBtn" class="btn btn-dark">검색</button>
+        <button id="resetSearch" class="btn btn-light">초기화</button>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel map-panel">
+        <div class="section-head">
+          <div>
+            <h2>자재 배치도</h2>
+            <p>자재를 다른 칸으로 끌어 이동할 수 있습니다.</p>
+          </div>
+          <span class="count" id="mapCount">0개 자재</span>
+        </div>
+        <div class="map-scroll">
+          <div id="mapGrid" class="map-grid"></div>
+        </div>
+        <div class="map-help">칸을 선택한 뒤 <b>선택 칸 비우기</b>를 누르면 해당 칸의 자재 정보가 삭제됩니다.</div>
+        <div class="selected-actions">
+          <span id="selectedLabel">선택된 칸 없음</span>
+          <button id="clearCell" class="btn btn-danger-outline" disabled>선택 칸 비우기</button>
+        </div>
+      </section>
+
+      <aside class="panel form-panel">
+        <div class="section-head">
+          <div>
+            <h2>자재 관리</h2>
+            <p>자재를 등록하거나 선택한 정보를 수정하세요.</p>
+          </div>
+        </div>
+        <form id="materialForm">
+          <label for="materialName">자재명</label>
+          <input id="materialName" required maxlength="40" placeholder="예: 메인 보드">
+          <label for="materialCode">품번</label>
+          <input id="materialCode" required maxlength="40" placeholder="예: IB-001">
+          <label>표시 색상 선택</label>
+          <input type="hidden" id="materialColor" value="red">
+          <div class="color-picker" id="colorPicker" aria-label="자재 색상 선택">
+            <button type="button" class="color-swatch active" data-color="red" aria-label="InBody Red"></button>
+            <button type="button" class="color-swatch" data-color="coral" aria-label="코랄"></button>
+            <button type="button" class="color-swatch" data-color="orange" aria-label="오렌지"></button>
+            <button type="button" class="color-swatch" data-color="amber" aria-label="앰버"></button>
+            <button type="button" class="color-swatch" data-color="yellow" aria-label="옐로"></button>
+            <button type="button" class="color-swatch" data-color="lime" aria-label="라임"></button>
+            <button type="button" class="color-swatch" data-color="green" aria-label="그린"></button>
+            <button type="button" class="color-swatch" data-color="teal" aria-label="틸"></button>
+            <button type="button" class="color-swatch" data-color="blue" aria-label="블루"></button>
+            <button type="button" class="color-swatch" data-color="navy" aria-label="네이비"></button>
+            <button type="button" class="color-swatch" data-color="purple" aria-label="퍼플"></button>
+            <button type="button" class="color-swatch" data-color="gray" aria-label="그레이"></button>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary full" id="saveMaterial">자재 등록</button>
+            <button type="button" class="btn btn-light full" id="cancelEdit">입력 초기화</button>
+          </div>
+        </form>
+        <div class="divider"></div>
+
+      </aside>
+    </div>
+    <footer>InBody Material Map <span>·</span> 현장 자재 위치 확인용</footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
